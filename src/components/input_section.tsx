@@ -1,14 +1,17 @@
 "use client";
 
-import { InputType } from "@/lib/types";
+import { InputType, TemplateType } from "@/lib/types";
 import { useState } from "react";
 import { InputDescription, InputTitle } from "./input";
 
 export default function Input_section({
   inputData,
+  templateData,
 }: {
   inputData: { [key: string]: InputType };
+  templateData: { [key: string]: TemplateType };
 }) {
+  const [template, setTemplate] = useState(null);
   const [inputState, setInputState] = useState({ ...inputData });
   return (
     <>

@@ -6,3 +6,8 @@ export type InputType = {
     description?: string;
   }[];
 };
+
+export type TemplateType = {
+  templateName: string;
+  imageUrl: string;
+};

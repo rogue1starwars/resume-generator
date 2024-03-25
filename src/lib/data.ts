@@ -1,6 +1,19 @@
-import { InputType } from "./types";
+import { InputType, TemplateType } from "./types";
 
-const dummyData = {
+const dummyTemplateData: { [key: string]: TemplateType } = {
+  1: {
+    templateName: "Template 1",
+    imageUrl: "https://i.imgur.com/2J0wz3v.png",
+  },
+  2: {
+    templateName: "Template 2",
+    imageUrl: "https://i.imgur.com/2J0wz3v.png",
+  },
+};
+
+const dummyData: {
+  [key: string]: InputType;
+} = {
   name: {
     heading: "Name",
     hidden: false,
@@ -103,4 +116,8 @@ const dummyData = {
 
 export function fetchData() {
   return dummyData;
+}
+
+export function fetchTemplateData() {
+  return dummyTemplateData;
 }
