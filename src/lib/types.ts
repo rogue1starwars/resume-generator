@@ -10,4 +10,5 @@ export type InputType = {
 export type TemplateType = {
   templateName: string;
   imageUrl: string;
+  selected: boolean;
 };
