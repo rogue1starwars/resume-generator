@@ -17,6 +17,7 @@ export function InputTitle({
     <input
       placeholder="title"
       type={"text"}
+      name={id+"Title"+index}
       value={inputState[id].data[index].title}
       onChange={(e) => {
         const newInputState: { [key: string]: InputType } = {
@@ -50,6 +51,7 @@ export function InputDescription({
         placeholder="description"
         type="text"
         value={inputState[id].data[index].description}
+        name={id+"Description"+index}
         onChange={(e) => {
           const newInputState: { [key: string]: InputType } = {
             ...inputState,
@@ -61,6 +63,7 @@ export function InputDescription({
       />
       <br />
       <button
+        type="button"
         onClick={() => {
           const newInputState: { [key: string]: InputType } = {
             ...inputState,

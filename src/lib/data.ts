@@ -30,11 +30,11 @@ const dummyData: {
       },
     ],
   },
-  id: {
-    heading: "Adress",
+  address: {
+    heading: "Address",
     hidden: false,
 
-    data: [{ title: "Adress" }],
+    data: [{ title: "" }],
   },
   phone: {
     heading: "Phone Number",

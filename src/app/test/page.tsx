@@ -4,16 +4,11 @@ import { fetchData, fetchTemplateData } from "@/lib/data";
 import React, { useState } from "react";
 import { InputTitle, InputDescription } from "@/components/input";
 import Image from "next/image";
-import { InputType, TemplateType } from "@/lib/types";
-
-export default function Input_section({
-  initialData,
-  templateData,
-}: {
-  initialData: { [key: string]: InputType };
-  templateData: { [key: string]: TemplateType };
-}) {
-  const [template, setTemplate] = useState({ ...templateData });
+export default function Page() {
+  const initialData = fetchData();
+  const initialTemplate = fetchTemplateData();
+  const [template, setTemplate] = useState({ ...initialTemplate });
+  //   const [state, dispatch] = useFormState(createItem, initialState);
   const [inputState, setInputState] = useState({ ...initialData });
 
   return (
@@ -41,7 +36,7 @@ export default function Input_section({
       })}
       {Object.keys(inputState).map((id) => {
         return (
-          <fieldset key={id}>
+          <div key={id}>
             <label className="text-lg font-semibold">
               {inputState[id].heading}
             </label>
@@ -68,7 +63,7 @@ export default function Input_section({
                 );
               })}
             </div>
-          </fieldset>
+          </div>
         );
       })}
       <button>Save</button>
