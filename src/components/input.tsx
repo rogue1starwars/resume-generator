@@ -1,23 +1,20 @@
 import { InputType } from "@/lib/types";
 
-export function InputTitle({
-  inputState,
-  setInputState,
-  id,
-  index,
-}: {
+type Props = {
   inputState: { [key: string]: InputType };
   setInputState: React.Dispatch<
     React.SetStateAction<{ [key: string]: InputType }>
   >;
   id: string;
   index: number;
-}) {
+};
+
+export function InputTitle({ inputState, setInputState, id, index }: Props) {
   return (
     <input
       placeholder="title"
       type={"text"}
-      name={id+"Title"+index}
+      name={id + "Title" + index}
       value={inputState[id].data[index].title}
       onChange={(e) => {
         const newInputState: { [key: string]: InputType } = {
@@ -25,7 +22,21 @@ export function InputTitle({
         };
         newInputState[id].data[index].title = e.target.value;
         setInputState(newInputState);
-        console.log(inputState[id].data[index].title);
+      }}
+    />
+  );
+}
+
+export function InputDate({ inputState, setInputState, id, index }: Props) {
+  return (
+    <input
+      placeholder="date"
+      type="text"
+      name={id + "Date" + index}
+      onChange={(e) => {
+        const newInputState: { [key: string]: InputType } = { ...inputState };
+        newInputState[id].data[index].date = e.target.value;
+        setInputState(newInputState);
       }}
     />
   );
@@ -36,14 +47,7 @@ export function InputDescription({
   setInputState,
   id,
   index,
-}: {
-  inputState: { [key: string]: InputType };
-  setInputState: React.Dispatch<
-    React.SetStateAction<{ [key: string]: InputType }>
-  >;
-  id: string;
-  index: number;
-}) {
+}: Props) {
   return (
     <>
       <br />
@@ -51,14 +55,13 @@ export function InputDescription({
         placeholder="description"
         type="text"
         value={inputState[id].data[index].description}
-        name={id+"Description"+index}
+        name={id + "Description" + index}
         onChange={(e) => {
           const newInputState: { [key: string]: InputType } = {
             ...inputState,
           };
           newInputState[id].data[index].description = e.target.value;
           setInputState(newInputState);
-          console.log(inputState[id].data[index].description);
         }}
       />
       <br />

@@ -1,10 +1,10 @@
 "use client";
 import saveData from "@/lib/createItem";
-import { fetchData, fetchTemplateData } from "@/lib/data";
 import React, { useState } from "react";
-import { InputTitle, InputDescription } from "@/components/input";
+import { InputTitle, InputDate, InputDescription } from "@/components/input";
 import Image from "next/image";
 import { InputType, TemplateType } from "@/lib/types";
+import { Input } from "postcss";
 
 export default function Input_section({
   initialData,
@@ -55,6 +55,14 @@ export default function Input_section({
                       id={id}
                       index={index}
                     />
+                    {typeof inputState[id].data[0].date !== "undefined" ? (
+                      <InputDate
+                        inputState={inputState}
+                        setInputState={setInputState}
+                        id={id}
+                        index={index}
+                      />
+                    ) : null}
                     {typeof inputState[id].data[0].description !==
                     "undefined" ? (
                       <InputDescription

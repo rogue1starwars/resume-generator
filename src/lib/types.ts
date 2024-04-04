@@ -4,6 +4,7 @@ export type InputType = {
   data: {
     title: string;
     description?: string;
+    date?: string;
   }[];
 };
 

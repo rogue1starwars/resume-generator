@@ -74,6 +74,7 @@ const dummyData: {
       {
         title: "",
         description: "",
+        date: "",
       },
     ],
   },
@@ -81,7 +82,7 @@ const dummyData: {
     heading: "Education",
     hidden: false,
 
-    data: [{ title: "", description: "" }],
+    data: [{ title: "", description: "", date: "", }],
   },
   skills: {
     heading: "Skills",
