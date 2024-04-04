@@ -4,10 +4,12 @@ export type InputType = {
   data: {
     title: string;
     description?: string;
+    date?: string;
   }[];
 };
 
 export type TemplateType = {
   templateName: string;
   imageUrl: string;
+  selected: boolean;
 };
