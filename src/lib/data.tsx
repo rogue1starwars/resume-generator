@@ -3,11 +3,18 @@ import { InputType, TemplateType } from "./types";
 const dummyTemplateData: { [key: string]: TemplateType } = {
   1: {
     templateName: "Template 1",
-    imageUrl: "https://i.imgur.com/2J0wz3v.png",
+    imageUrl: "/resume1.jpg",
+    selected: false,
   },
   2: {
     templateName: "Template 2",
-    imageUrl: "https://i.imgur.com/2J0wz3v.png",
+    imageUrl: "/resume2.jpg",
+    selected: false,
+  },
+  3: {
+    templateName: "Template 3",
+    imageUrl: "/resume3.jpg",
+    selected: false,
   },
 };
 
@@ -23,11 +30,11 @@ const dummyData: {
       },
     ],
   },
-  id: {
-    heading: "Adress",
+  address: {
+    heading: "Address",
     hidden: false,
 
-    data: [{ title: "Adress" }],
+    data: [{ title: "" }],
   },
   phone: {
     heading: "Phone Number",
@@ -67,6 +74,7 @@ const dummyData: {
       {
         title: "",
         description: "",
+        date: "",
       },
     ],
   },
@@ -74,7 +82,7 @@ const dummyData: {
     heading: "Education",
     hidden: false,
 
-    data: [{ title: "", description: "" }],
+    data: [{ title: "", description: "", date: "", }],
   },
   skills: {
     heading: "Skills",
