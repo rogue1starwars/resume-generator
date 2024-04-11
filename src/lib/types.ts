@@ -8,6 +8,8 @@ export type InputType = {
   }[];
 };
 
+export type InputChunkType = { [key: string]: InputType }
+
 export type TemplateType = {
   templateName: string;
   imageUrl: string;

@@ -3,21 +3,24 @@ import saveData from "@/lib/saveData";
 import React, { useState } from "react";
 import { InputTitle, InputDate, InputDescription } from "@/components/input";
 import Image from "next/image";
-import { InputType, TemplateType } from "@/lib/types";
+import { InputChunkType, TemplateType } from "@/lib/types";
 import { Input } from "postcss";
 
 export default function Input_section({
   initialData,
   templateData,
+  userID,
 }: {
-  initialData: { [key: string]: InputType };
+  initialData: InputChunkType;
   templateData: { [key: string]: TemplateType };
+  userID: string;
 }) {
   const [template, setTemplate] = useState({ ...templateData });
   const [inputState, setInputState] = useState({ ...initialData });
 
   return (
-    <form action={saveData}>
+    // <form action={saveData}>
+    <>
       <label>Templates</label>
       {Object.keys(template).map((id, index) => {
         return (
@@ -40,6 +43,7 @@ export default function Input_section({
         );
       })}
       {Object.keys(inputState).map((id) => {
+        // console.log(id);
         return (
           <fieldset key={id}>
             <label className="text-lg font-semibold">
@@ -79,7 +83,9 @@ export default function Input_section({
           </fieldset>
         );
       })}
-      <button>Save</button>
-    </form>
+      <button onClick={() => saveData(userID, inputState)}>Save</button>
+      {/* <input type="submit" /> */}
+    </>
+    // </form>
   );
 }

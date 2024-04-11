@@ -1,4 +1,7 @@
-import { InputType, TemplateType } from "./types";
+import { nanoid } from "nanoid";
+import { InputChunkType, TemplateType } from "./types";
+
+import { createClient } from "@supabase/supabase-js";
 
 const dummyTemplateData: { [key: string]: TemplateType } = {
   1: {
@@ -18,9 +21,7 @@ const dummyTemplateData: { [key: string]: TemplateType } = {
   },
 };
 
-const dummyData: {
-  [key: string]: InputType;
-} = {
+const dummyData: InputChunkType = {
   name: {
     heading: "Name",
     hidden: false,
@@ -82,7 +83,7 @@ const dummyData: {
     heading: "Education",
     hidden: false,
 
-    data: [{ title: "", description: "", date: "", }],
+    data: [{ title: "", description: "", date: "" }],
   },
   skills: {
     heading: "Skills",
@@ -122,8 +123,32 @@ const dummyData: {
   },
 };
 
-export function fetchData() {
-  return dummyData;
+export async function fetchData(userID: string): Promise<InputChunkType> {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
+  const { data, error } = await supabase
+    .from("user_data")
+    .select("data")
+    .eq("user_id", userID)
+    // neq nanoid for forcing supabase to fetch instead of using cache
+    .neq("user_id", nanoid())
+    .single();
+
+  console.log(data, error);
+  console.log("query user_id:", userID);
+  // console.log(data!.data.name, error);
+
+  // for (let item in data[0].data) {
+  // console.log(data[0].data[item]);
+  // }
+
+  if (data == null) {
+    console.log("Dummy data returned!");
+    return dummyData;
+  } else return data.data;
 }
 
 export function fetchTemplateData() {
