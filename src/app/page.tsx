@@ -5,7 +5,7 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href=""> Resume Generator </a>{" "}
+          Welcome to <a href=""> Resume Generator </a>
         </h1>
 
         <p className={styles.description}>
@@ -18,11 +18,7 @@ export default function Home() {
             <p> Build your resume from one of the following templates. </p>{" "}
           </a>
           <a href="#" className={styles.card}>
-            <h3> Download & Share & rarr; </h3>{" "}
-            <p>
-              {" "}
-              Download your resume in PDF format and share it with employers.{" "}
-            </p>{" "}
+            <h3> Create resume without logging in</h3>{" "}
           </a>{" "}
         </div>
       </main>
