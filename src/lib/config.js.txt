@@ -1,0 +1,7 @@
+export default {
+	projectId: "resume-generator-4b1d1",
+	appId: "1:880409235833:web:54f74edd5454d3d3b95fa8",
+	apiKey: "AIzaSyBUZZz4ubfLzLlqm5txiqeMlttZlVbKBmI",
+	storageBucket: "resume-generator-4b1d1.appspot.com",
+	authDomain: "resume-generator-4b1d1.firebaseapp.com",
+};
