@@ -15,3 +15,5 @@ export type TemplateType = {
   imageUrl: string;
   selected: boolean;
 };
+
+export type TemplateChunkType = { [key: string]: TemplateType }

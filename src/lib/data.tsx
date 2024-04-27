@@ -1,7 +1,4 @@
-import { nanoid } from "nanoid";
 import { InputChunkType, TemplateType } from "./types";
-
-import { createClient } from "@supabase/supabase-js";
 
 const dummyTemplateData: { [key: string]: TemplateType } = {
   1: {
@@ -123,34 +120,44 @@ const dummyData: InputChunkType = {
   },
 };
 
-export async function fetchData(userID: string): Promise<InputChunkType> {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-
-  const { data, error } = await supabase
-    .from("user_data")
-    .select("data")
-    .eq("user_id", userID)
-    // neq nanoid for forcing supabase to fetch instead of using cache
-    .neq("user_id", nanoid())
-    .single();
-
-  console.log(data, error);
-  console.log("query user_id:", userID);
-  // console.log(data!.data.name, error);
-
-  // for (let item in data[0].data) {
-  // console.log(data[0].data[item]);
-  // }
-
-  if (data == null) {
-    console.log("Dummy data returned!");
-    return dummyData;
-  } else return data.data;
+export function fetchData(lsKey: string) {
+  const cachedData = localStorage?.getItem(lsKey);
+  const initialData = cachedData ? JSON.parse(cachedData) : dummyData;
+  console.log(cachedData);
+  return initialData;
 }
 
-export function fetchTemplateData() {
-  return dummyTemplateData;
+export function fetchTemplateData(lsKey: string) {
+  const cachedData = localStorage.getItem(lsKey);
+  const templateData = cachedData ? JSON.parse(cachedData) : dummyTemplateData;
+  return templateData;
 }
+
+// deprecated.
+// export async function fetchData(userID: string): Promise<InputChunkType> {
+//   const supabase = createClient(
+//     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+//   );
+
+//   const { data, error } = await supabase
+//     .from("user_data")
+//     .select("data")
+//     .eq("user_id", userID)
+//     // neq nanoid for forcing supabase to fetch instead of using cache
+//     .neq("user_id", nanoid())
+//     .single();
+
+//   console.log(data, error);
+//   console.log("query user_id:", userID);
+//   // console.log(data!.data.name, error);
+
+//   // for (let item in data[0].data) {
+//   // console.log(data[0].data[item]);
+//   // }
+
+//   if (data == null) {
+//     console.log("Dummy data returned!");
+//     return dummyData;
+//   } else return data.data;
+// }

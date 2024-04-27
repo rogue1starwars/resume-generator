@@ -1,22 +1,37 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import saveData from "@/lib/saveData";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputTitle, InputDate, InputDescription } from "@/components/input";
 import Image from "next/image";
-import { InputChunkType, TemplateType } from "@/lib/types";
-import { Input } from "postcss";
+import { InputChunkType, TemplateChunkType } from "@/lib/types";
+import { fetchData, fetchTemplateData } from "@/lib/data";
 
-export default function Input_section({
-  initialData,
-  templateData,
-  userID,
-}: {
-  initialData: InputChunkType;
-  templateData: { [key: string]: TemplateType };
-  userID: string;
-}) {
-  const [template, setTemplate] = useState({ ...templateData });
-  const [inputState, setInputState] = useState({ ...initialData });
+const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
+const LS_TEMPLATE_KEY = "resume-generator-template-key";
+
+export default function Input_section({}: {}) {
+  const [template, setTemplate] = useState<TemplateChunkType>({});
+  const [inputState, setInputState] = useState<InputChunkType>({});
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTemplate({ ...fetchTemplateData(LS_TEMPLATE_KEY) });
+    setInputState({
+      ...fetchData(LS_INPUT_DATA_KEY),
+    });
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    localStorage.setItem(LS_INPUT_DATA_KEY, JSON.stringify(inputState));
+    console.log("LocalStorage Update: input state");
+  }, [inputState]);
+  useEffect(() => {
+    if (!isLoaded) return;
+    localStorage.setItem(LS_TEMPLATE_KEY, JSON.stringify(template));
+    console.log("LocalStorage Update: template");
+  }, [template]);
 
   return (
     // <form action={saveData}>
@@ -38,6 +53,17 @@ export default function Input_section({
               type="radio"
               name="templates"
               value={template[id].templateName}
+              onChange={(e) => {
+                const newTemplateState: TemplateChunkType = {
+                  ...template,
+                };
+                for (let tp in newTemplateState) {
+                  newTemplateState[tp].selected = false;
+                }
+                newTemplateState[id].selected = e.target.checked;
+                setTemplate(newTemplateState);
+              }}
+              checked={template[id].selected}
             />
           </div>
         );
@@ -83,7 +109,7 @@ export default function Input_section({
           </fieldset>
         );
       })}
-      <button onClick={() => saveData(userID, inputState)}>Save</button>
+      {/* <button onClick={() => saveData(userID, inputState)}>Save</button> */}
       {/* <input type="submit" /> */}
     </>
     // </form>
