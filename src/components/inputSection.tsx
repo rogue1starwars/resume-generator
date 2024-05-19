@@ -5,11 +5,12 @@ import { InputTitle, InputDate, InputDescription } from "@/components/input";
 import Image from "next/image";
 import { InputChunkType, TemplateChunkType } from "@/lib/types";
 import { fetchData, fetchTemplateData } from "@/lib/data";
+import PrintButton from "./printButton";
 
 const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
 const LS_TEMPLATE_KEY = "resume-generator-template-key";
 
-export default function Input_section({}: {}) {
+export default function InputSection({}: {}) {
   const [template, setTemplate] = useState<TemplateChunkType>({});
   const [inputState, setInputState] = useState<InputChunkType>({});
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,6 +37,11 @@ export default function Input_section({}: {}) {
   return (
     // <form action={saveData}>
     <>
+      {isLoaded ? (
+        <PrintButton inputData={inputState} template={template} />
+      ) : (
+        <div />
+      )}
       <label>Templates</label>
       {Object.keys(template).map((id, index) => {
         return (
