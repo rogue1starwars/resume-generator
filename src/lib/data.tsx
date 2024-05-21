@@ -18,7 +18,7 @@ const dummyTemplateData: { [key: string]: TemplateType } = {
   },
 };
 
-const dummySectionData: Sections = [
+const sectionData: Sections = [
   {
     label: "basics",
     title: "Basics",
@@ -152,7 +152,7 @@ export function fetchData(lsKey: string): InputChunkType {
 }
 
 export function fetchSectionData(): Sections {
-  return dummySectionData;
+  return sectionData;
 }
 
 export function fetchTemplateData(lsKey: string): {
