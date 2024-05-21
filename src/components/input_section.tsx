@@ -3,14 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { InputTitle, InputDate, InputDescription } from "@/components/input";
 import Image from "next/image";
-import { InputChunkType, TemplateChunkType } from "@/lib/types";
-import { fetchData, fetchTemplateData } from "@/lib/data";
+import { InputChunkType, Sections, TemplateChunkType } from "@/lib/types";
+import { fetchData, fetchSectionData, fetchTemplateData } from "@/lib/data";
 
 const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
 const LS_TEMPLATE_KEY = "resume-generator-template-key";
 
 export default function Input_section({}: {}) {
   const [template, setTemplate] = useState<TemplateChunkType>({});
+  const [sections, setSections] = useState<Sections>(fetchSectionData());
   const [inputState, setInputState] = useState<InputChunkType>({});
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -19,6 +20,8 @@ export default function Input_section({}: {}) {
     setInputState({
       ...fetchData(LS_INPUT_DATA_KEY),
     });
+    setSections(fetchSectionData());
+
     setIsLoaded(true);
   }, []);
 
@@ -68,7 +71,7 @@ export default function Input_section({}: {}) {
           </div>
         );
       })}
-      {Object.keys(inputState).map((id) => {
+      {/* {Object.keys(inputState).map((id) => {
         // console.log(id);
         return (
           <fieldset key={id}>
@@ -107,6 +110,57 @@ export default function Input_section({}: {}) {
               })}
             </div>
           </fieldset>
+        );
+      })} */}
+      {sections.map((section) => {
+        return (
+          <div>
+            <h2>{section.title}</h2>
+            <p>{section.description}</p>
+            {Object.keys(inputState).map((id) => {
+              if (inputState[id].label === section.label) {
+                return (
+                  <fieldset key={id}>
+                    <label className="text-lg font-semibold">
+                      {inputState[id].heading}
+                    </label>
+                    <div>
+                      {inputState[id].data.map((data, index) => {
+                        return (
+                          <div key={index}>
+                            <InputTitle
+                              inputState={inputState}
+                              setInputState={setInputState}
+                              id={id}
+                              index={index}
+                            />
+                            {typeof inputState[id].data[0].date !==
+                            "undefined" ? (
+                              <InputDate
+                                inputState={inputState}
+                                setInputState={setInputState}
+                                id={id}
+                                index={index}
+                              />
+                            ) : null}
+                            {typeof inputState[id].data[0].description !==
+                            "undefined" ? (
+                              <InputDescription
+                                inputState={inputState}
+                                setInputState={setInputState}
+                                id={id}
+                                index={index}
+                              />
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+                );
+              }
+            })}
+          </div>
         );
       })}
       {/* <button onClick={() => saveData(userID, inputState)}>Save</button> */}
