@@ -11,7 +11,7 @@ const LS_TEMPLATE_KEY = "resume-generator-template-key";
 
 export default function Input_section({}: {}) {
   const [template, setTemplate] = useState<TemplateChunkType>({});
-  const [sections, setSections] = useState<Sections>(fetchSectionData());
+  const [sections, setSections] = useState<Sections>(fetchSectionData()); // Added section state to store section data. (There is no need to change the state of the section data, so setSections function is not used. )
   const [inputState, setInputState] = useState<InputChunkType>({});
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -20,7 +20,6 @@ export default function Input_section({}: {}) {
     setInputState({
       ...fetchData(LS_INPUT_DATA_KEY),
     });
-    setSections(fetchSectionData());
 
     setIsLoaded(true);
   }, []);
@@ -114,7 +113,7 @@ export default function Input_section({}: {}) {
       })} */}
       {sections.map((section) => {
         return (
-          <div>
+          <section>
             <h2>{section.title}</h2>
             <p>{section.description}</p>
             {Object.keys(inputState).map((id) => {
@@ -160,7 +159,7 @@ export default function Input_section({}: {}) {
                 );
               }
             })}
-          </div>
+          </section>
         );
       })}
       {/* <button onClick={() => saveData(userID, inputState)}>Save</button> */}

@@ -18,6 +18,7 @@ const dummyTemplateData: { [key: string]: TemplateType } = {
   },
 };
 
+// Add a section data for dynamic section creation
 const sectionData: Sections = [
   {
     label: "basics",
