@@ -117,13 +117,13 @@ export default function InputSection({}: {}) {
           </fieldset>
         );
       })} */}
-      {sections.map((section) => {
+      {sections.map((sec) => {
         return (
-          <section>
-            <h2>{section.title}</h2>
-            <p>{section.description}</p>
+          <section key={sec.label}>
+            <h2>{sec.title}</h2>
+            <p>{sec.description}</p>
             {Object.keys(inputState).map((id) => {
-              if (inputState[id].label === section.label) {
+              if (inputState[id].label === sec.label) {
                 return (
                   <fieldset key={id}>
                     <label className="text-lg font-semibold">
