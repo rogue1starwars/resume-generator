@@ -1,6 +1,7 @@
 export type InputType = {
   heading: string;
   hidden: boolean;
+  label: "basics" | "work" | "education" | "others";
   data: {
     title: string;
     description?: string;
@@ -8,7 +9,7 @@ export type InputType = {
   }[];
 };
 
-export type InputChunkType = { [key: string]: InputType }
+export type InputChunkType = { [key: string]: InputType };
 
 export type TemplateType = {
   templateName: string;
@@ -16,4 +17,4 @@ export type TemplateType = {
   selected: boolean;
 };
 
-export type TemplateChunkType = { [key: string]: TemplateType }
+export type TemplateChunkType = { [key: string]: TemplateType };
