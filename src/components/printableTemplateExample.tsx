@@ -5,17 +5,16 @@ import { forwardRef } from "react";
 
 interface Props {
   inputData: InputChunkType;
-  template: TemplateChunkType;
 }
 
 const PrintableTemplate = forwardRef<HTMLDivElement, Props>(
-  ({ inputData, template }, ref) => {
+  ({ inputData }, ref) => {
     return (
       <div className="h-0 overflow-hidden">
         <div ref={ref} className="w-full">
           {/* TODO: define template structure and handle dynamic user data  */}
           <div className="page-break">{JSON.stringify(inputData)}</div>
-          <div className="page-break">test1</div>
+          {/* <div className="page-break">test1</div> */}
           <div className="page-break">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus
             odio ut metus bibendum laoreet. Morbi ligula metus, tempus non
@@ -48,8 +47,8 @@ const PrintableTemplate = forwardRef<HTMLDivElement, Props>(
             accumsan sit amet risus in volutpat.
           </div>
           <br />
-          {/* <div className="page-break"> */}
-          <div className="">
+          <div className="page-break">
+            {/* <div className=""> */}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed luctus
             odio ut metus bibendum laoreet. Morbi ligula metus, tempus non
             tincidunt a, bibendum vitae nulla. Vestibulum ante ipsum primis in

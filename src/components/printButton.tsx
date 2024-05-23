@@ -34,11 +34,17 @@ const PrintButton = ({
         download PDF
       </button>
       {/* TODO: send input data to appropriate template? */}
-      <PrintableTemplate
-        ref={documentRef}
-        inputData={inputData}
-        template={template}
-      />
+      {/* switch (template number) {
+        case 1:
+          template 1
+          break;
+        case 2:
+          template 2
+          break;
+        default:
+          break;
+      } */}
+      <PrintableTemplate ref={documentRef} inputData={inputData} />
     </div>
   );
 };
