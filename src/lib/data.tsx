@@ -1,4 +1,4 @@
-import { InputChunkType, TemplateType } from "./types";
+import { InputChunkType, Sections, TemplateType } from "./types";
 
 const dummyTemplateData: { [key: string]: TemplateType } = {
   1: {
@@ -18,10 +18,35 @@ const dummyTemplateData: { [key: string]: TemplateType } = {
   },
 };
 
+// Add a section data for dynamic section creation
+const sectionData: Sections = [
+  {
+    label: "basics",
+    title: "Basics",
+    description: "Input your basic information.",
+  },
+  {
+    label: "work",
+    title: "Work Experience",
+    description: "Input your work experience information",
+  },
+  {
+    label: "education",
+    title: "Education",
+    description: "Input your education information",
+  },
+  {
+    label: "others",
+    title: "Others",
+    description: "Input other information about yourself",
+  },
+];
+
 const dummyData: InputChunkType = {
   name: {
     heading: "Name",
     hidden: false,
+    label: "basics",
     data: [
       {
         title: "",
@@ -31,13 +56,13 @@ const dummyData: InputChunkType = {
   address: {
     heading: "Address",
     hidden: false,
-
+    label: "basics",
     data: [{ title: "" }],
   },
   phone: {
     heading: "Phone Number",
     hidden: false,
-
+    label: "basics",
     data: [
       {
         title: "",
@@ -47,7 +72,7 @@ const dummyData: InputChunkType = {
   linkedin: {
     heading: "LinkedIn",
     hidden: false,
-
+    label: "basics",
     data: [
       {
         title: "",
@@ -57,7 +82,7 @@ const dummyData: InputChunkType = {
   facebook: {
     heading: "Facebook",
     hidden: false,
-
+    label: "basics",
     data: [
       {
         title: "",
@@ -67,7 +92,7 @@ const dummyData: InputChunkType = {
   WorkExperience: {
     heading: "Work Experience",
     hidden: false,
-
+    label: "work",
     data: [
       {
         title: "",
@@ -79,55 +104,61 @@ const dummyData: InputChunkType = {
   education: {
     heading: "Education",
     hidden: false,
-
+    label: "education",
     data: [{ title: "", description: "", date: "" }],
   },
   skills: {
     heading: "Skills",
     hidden: false,
-
+    label: "others",
     data: [{ title: "", description: "" }],
   },
   languages: {
     heading: "Languages",
     hidden: false,
-
+    label: "others",
     data: [{ title: "", description: "" }],
   },
   nationality: {
     heading: "Nationality",
     hidden: false,
-
+    label: "others",
     data: [{ title: "", description: "" }],
   },
   interests: {
     heading: "Interests",
     hidden: false,
-
+    label: "others",
     data: [{ title: "", description: "" }],
   },
   certificates: {
     heading: "Certificates",
     hidden: false,
-
+    label: "others",
     data: [{ title: "", description: "" }],
   },
   awards: {
     heading: "Awards",
     hidden: false,
-
+    label: "others",
     data: [{ title: "", description: "" }],
   },
 };
 
-export function fetchData(lsKey: string) {
+export function fetchData(lsKey: string): InputChunkType {
   const cachedData = localStorage?.getItem(lsKey);
   const initialData = cachedData ? JSON.parse(cachedData) : dummyData;
   console.log(cachedData);
   return initialData;
 }
 
-export function fetchTemplateData(lsKey: string) {
+export function fetchSectionData(): Sections {
+  return sectionData;
+}
+
+export function fetchTemplateData(lsKey: string): {
+  [key: string]: TemplateType;
+} {
   const cachedData = localStorage.getItem(lsKey);
   const templateData = cachedData ? JSON.parse(cachedData) : dummyTemplateData;
   return templateData;
