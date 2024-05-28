@@ -26,8 +26,12 @@ const PrintableTemplate = forwardRef<HTMLDivElement, Props>(
             {inputData.nationality.data[0].title != "" && (
               <>
                 <span>Nationality: </span>
-                {inputData.nationality.data.map((countryName) => {
-                  return <span>{countryName.title}</span>;
+                {inputData.nationality.data.map((countryName, index) => {
+                  return (
+                    <span key={countryName.title + index}>
+                      {countryName.title}
+                    </span>
+                  );
                 })}
                 <br />
               </>
