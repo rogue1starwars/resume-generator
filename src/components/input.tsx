@@ -13,6 +13,7 @@ export function InputTitle({ inputState, setInputState, id, index }: Props) {
   return (
     <input
       placeholder="title"
+      className="py-2 px-3 rounded w-[60%]"
       type={"text"}
       name={id + "Title" + index}
       value={inputState[id].data[index].title}
@@ -31,6 +32,7 @@ export function InputDate({ inputState, setInputState, id, index }: Props) {
   return (
     <input
       placeholder="date"
+      className="py-2 px-3 rounded  ml-4 w-[30%]"
       type="text"
       name={id + "Date" + index}
       onChange={(e) => {
@@ -51,9 +53,10 @@ export function InputDescription({
   return (
     <>
       <br />
-      <input
+      <textarea
         placeholder="description"
-        type="text"
+        className="py-2 px-3 rounded w-full mt-2 "
+        
         value={inputState[id].data[index].description}
         name={id + "Description" + index}
         onChange={(e) => {

@@ -6,6 +6,8 @@ import Image from "next/image";
 import { InputChunkType, Sections, TemplateChunkType } from "@/lib/types";
 import { fetchData, fetchSectionData, fetchTemplateData } from "@/lib/data";
 import PrintButton from "./printButton";
+import Background from "./background";
+import SectionTitle from "./sectionTitle";
 
 const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
 const LS_TEMPLATE_KEY = "resume-generator-template-key";
@@ -76,60 +78,20 @@ export default function InputSection({}: {}) {
           </div>
         );
       })}
-      {/* {Object.keys(inputState).map((id) => {
-        // console.log(id);
-        return (
-          <fieldset key={id}>
-            <label className="text-lg font-semibold">
-              {inputState[id].heading}
-            </label>
-            <div>
-              {inputState[id].data.map((data, index) => {
-                return (
-                  <div key={index}>
-                    <InputTitle
-                      inputState={inputState}
-                      setInputState={setInputState}
-                      id={id}
-                      index={index}
-                    />
-                    {typeof inputState[id].data[0].date !== "undefined" ? (
-                      <InputDate
-                        inputState={inputState}
-                        setInputState={setInputState}
-                        id={id}
-                        index={index}
-                      />
-                    ) : null}
-                    {typeof inputState[id].data[0].description !==
-                    "undefined" ? (
-                      <InputDescription
-                        inputState={inputState}
-                        setInputState={setInputState}
-                        id={id}
-                        index={index}
-                      />
-                    ) : null}
-                  </div>
-                );
-              })}
-            </div>
-          </fieldset>
-        );
-      })} */}
+
       {sections.map((sec) => {
         return (
-          <section key={sec.label}>
-            <h2>{sec.title}</h2>
-            <p>{sec.description}</p>
+          <section key={sec.label} className="mb-12">
+            <SectionTitle sec={sec} />
+
             {Object.keys(inputState).map((id) => {
               if (inputState[id].label === sec.label) {
                 return (
                   <fieldset key={id}>
-                    <label className="text-lg font-semibold">
+                    <label className="text-sm text-gray-700 mb-2">
                       {inputState[id].heading}
                     </label>
-                    <div>
+                    <div className="my-2">
                       {inputState[id].data.map((data, index) => {
                         return (
                           <div key={index}>
@@ -160,6 +122,7 @@ export default function InputSection({}: {}) {
                           </div>
                         );
                       })}
+                      
                     </div>
                   </fieldset>
                 );
@@ -170,6 +133,9 @@ export default function InputSection({}: {}) {
       })}
       {/* <button onClick={() => saveData(userID, inputState)}>Save</button> */}
       {/* <input type="submit" /> */}
+      <div className="absolute inset-0 z-[-10px] h-lvh">
+        {/* <Background /> */}
+      </div>
     </>
     // </form>
   );
