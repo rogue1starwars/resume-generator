@@ -29,9 +29,9 @@ export default function AddButton({
         newInputState[id].data.push(lastDataItem);
         setInputState(newInputState);
       }}
-      className="text-2xl"
+      className="text-sm font-semibold text-white bg-red-400 hover:bg-red-500 py-2 px-3 rounded-full "
     >
-      +
+      Add+
     </button>
   );
 }

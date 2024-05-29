@@ -44,11 +44,6 @@ export default function InputSection({}: {}) {
   return (
     // <form action={saveData}>
     <>
-      {isLoaded ? (
-        <PrintButton inputData={inputState} template={template} />
-      ) : (
-        <div />
-      )}
       <label>Templates</label>
       {Object.keys(template).map((id, index) => {
         return (
@@ -90,23 +85,17 @@ export default function InputSection({}: {}) {
             {Object.keys(inputState).map((id) => {
               if (inputState[id].label === sec.label) {
                 return (
-                  <fieldset key={id}>
+                  <fieldset key={id} className="my-4">
                     <label className="text-sm text-gray-700 mb-2">
                       {inputState[id].heading}
                     </label>
                     <div className="my-2">
                       {inputState[id].data.map((data, index) => {
                         return (
-                          <div key={index} className="grid">
-                            {inputState[id].data.length > 1 ? (
-                              <DeleteButton
-                                inputState={inputState}
-                                setInputState={setInputState}
-                                id={id}
-                                index={index}
-                              />
-                            ) : null}
-
+                          <div
+                            key={index}
+                            className="grid grid-cols-10 gap-2 sm:mb-6 mb-10"
+                          >
                             <InputTitle
                               inputState={inputState}
                               setInputState={setInputState}
@@ -114,34 +103,42 @@ export default function InputSection({}: {}) {
                               index={index}
                             />
                             {typeof inputState[id].data[0].date !==
-                            "undefined" ? (
+                              "undefined" && (
                               <InputDate
                                 inputState={inputState}
                                 setInputState={setInputState}
                                 id={id}
                                 index={index}
                               />
-                            ) : null}
+                            )}
+                            {inputState[id].data.length > 1 && (
+                              <DeleteButton
+                                inputState={inputState}
+                                setInputState={setInputState}
+                                id={id}
+                                index={index}
+                              />
+                            )}
                             {typeof inputState[id].data[0].description !==
-                            "undefined" ? (
+                              "undefined" && (
                               <InputDescription
                                 inputState={inputState}
                                 setInputState={setInputState}
                                 id={id}
                                 index={index}
                               />
-                            ) : null}
+                            )}
                           </div>
                         );
                       })}
                     </div>
-                    {inputState[id].add ? (
+                    {inputState[id].add && (
                       <AddButton
                         inputState={inputState}
                         setInputState={setInputState}
                         id={id}
                       />
-                    ) : null}
+                    )}
                   </fieldset>
                 );
               }
@@ -151,9 +148,11 @@ export default function InputSection({}: {}) {
       })}
       {/* <button onClick={() => saveData(userID, inputState)}>Save</button> */}
       {/* <input type="submit" /> */}
-      <div className="absolute inset-0 z-[-10px] h-lvh">
-        {/* <Background /> */}
-      </div>
+      {isLoaded ? (
+        <PrintButton inputData={inputState} template={template} />
+      ) : (
+        <div />
+      )}
     </>
     // </form>
   );
