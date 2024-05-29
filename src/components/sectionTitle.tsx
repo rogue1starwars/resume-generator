@@ -12,7 +12,7 @@ type Props = {
   description?: string;
 };
 
-export default function ({ title, description }: Props) {
+export default function SectionTitle({ title, description }: Props) {
   return (
     <div className="my-4">
       <h2 className="font-semibold text-xl">{title}</h2>
