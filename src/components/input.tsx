@@ -68,7 +68,7 @@ export function InputDescription({
         }}
       />
       <br />
-      <button
+      {/* <button
         type="button"
         onClick={() => {
           const newInputState: { [key: string]: InputType } = {
@@ -83,7 +83,7 @@ export function InputDescription({
         className="text-2xl"
       >
         +
-      </button>
+      </button> */}
       <br />
     </>
   );

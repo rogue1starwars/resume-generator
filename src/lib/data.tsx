@@ -41,12 +41,12 @@ const sectionData: Sections = [
     description: "Input other information about yourself",
   },
 ];
-
 const dummyData: InputChunkType = {
   name: {
     heading: "Name",
     hidden: false,
     label: "basics",
+    add: false,
     data: [
       {
         title: "",
@@ -57,12 +57,14 @@ const dummyData: InputChunkType = {
     heading: "Address",
     hidden: false,
     label: "basics",
+    add: false,
     data: [{ title: "" }],
   },
   phone: {
     heading: "Phone Number",
     hidden: false,
     label: "basics",
+    add: false,
     data: [
       {
         title: "",
@@ -73,6 +75,7 @@ const dummyData: InputChunkType = {
     heading: "LinkedIn",
     hidden: false,
     label: "basics",
+    add: false,
     data: [
       {
         title: "",
@@ -83,6 +86,7 @@ const dummyData: InputChunkType = {
     heading: "Facebook",
     hidden: false,
     label: "basics",
+    add: false,
     data: [
       {
         title: "",
@@ -93,6 +97,7 @@ const dummyData: InputChunkType = {
     heading: "Work Experience",
     hidden: false,
     label: "work",
+    add: true,
     data: [
       {
         title: "",
@@ -105,42 +110,49 @@ const dummyData: InputChunkType = {
     heading: "Education",
     hidden: false,
     label: "education",
+    add: true,
     data: [{ title: "", description: "", date: "" }],
   },
   skills: {
     heading: "Skills",
     hidden: false,
     label: "others",
+    add: true,
     data: [{ title: "", description: "" }],
   },
   languages: {
     heading: "Languages",
     hidden: false,
     label: "others",
+    add: true,
     data: [{ title: "", description: "" }],
   },
   nationality: {
     heading: "Nationality",
     hidden: false,
     label: "others",
+    add: true,
     data: [{ title: "", description: "" }],
   },
   interests: {
     heading: "Interests",
     hidden: false,
     label: "others",
+    add: true,
     data: [{ title: "", description: "" }],
   },
   certificates: {
     heading: "Certificates",
     hidden: false,
     label: "others",
+    add: true,
     data: [{ title: "", description: "" }],
   },
   awards: {
     heading: "Awards",
     hidden: false,
     label: "others",
+    add: true,
     data: [{ title: "", description: "" }],
   },
 };

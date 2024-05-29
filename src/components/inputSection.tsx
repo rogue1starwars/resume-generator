@@ -8,6 +8,9 @@ import { fetchData, fetchSectionData, fetchTemplateData } from "@/lib/data";
 import PrintButton from "./printButton";
 import Background from "./background";
 import SectionTitle from "./sectionTitle";
+import { InputType } from "zlib";
+import DeleteButton from "./deleteButton";
+import AddButton from "./addButton";
 
 const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
 const LS_TEMPLATE_KEY = "resume-generator-template-key";
@@ -94,7 +97,16 @@ export default function InputSection({}: {}) {
                     <div className="my-2">
                       {inputState[id].data.map((data, index) => {
                         return (
-                          <div key={index}>
+                          <div key={index} className="grid">
+                            {inputState[id].data.length > 1 ? (
+                              <DeleteButton
+                                inputState={inputState}
+                                setInputState={setInputState}
+                                id={id}
+                                index={index}
+                              />
+                            ) : null}
+
                             <InputTitle
                               inputState={inputState}
                               setInputState={setInputState}
@@ -122,8 +134,14 @@ export default function InputSection({}: {}) {
                           </div>
                         );
                       })}
-                      
                     </div>
+                    {inputState[id].add ? (
+                      <AddButton
+                        inputState={inputState}
+                        setInputState={setInputState}
+                        id={id}
+                      />
+                    ) : null}
                   </fieldset>
                 );
               }
