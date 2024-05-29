@@ -44,43 +44,45 @@ export default function InputSection({}: {}) {
   return (
     // <form action={saveData}>
     <>
-      <label>Templates</label>
-      {Object.keys(template).map((id, index) => {
-        return (
-          <div key={template[id].templateName}>
-            <label className="text-lg font-semibold">
-              {template[id].templateName}
-            </label>
-            <Image
-              src={template[id].imageUrl}
-              alt={template[id].templateName}
-              width="100"
-              height="100"
-            />
-            <input
-              type="radio"
-              name="templates"
-              value={template[id].templateName}
-              onChange={(e) => {
-                const newTemplateState: TemplateChunkType = {
-                  ...template,
-                };
-                for (let tp in newTemplateState) {
-                  newTemplateState[tp].selected = false;
-                }
-                newTemplateState[id].selected = e.target.checked;
-                setTemplate(newTemplateState);
-              }}
-              checked={template[id].selected}
-            />
-          </div>
-        );
-      })}
+      <SectionTitle title="Templates" />
+      <div className="flex justify-around">
+        {Object.keys(template).map((id, index) => {
+          return (
+            <div key={template[id].templateName} className="flex flex-col gap-2">
+              <label className="text-sm text-gray-700 font-semibold mx-auto text-center">
+                {template[id].templateName}
+              </label>
+              <Image
+                src={template[id].imageUrl}
+                alt={template[id].templateName}
+                width="100"
+                height="100"
+              />
+              <input
+                type="radio"
+                name="templates"
+                value={template[id].templateName}
+                onChange={(e) => {
+                  const newTemplateState: TemplateChunkType = {
+                    ...template,
+                  };
+                  for (let tp in newTemplateState) {
+                    newTemplateState[tp].selected = false;
+                  }
+                  newTemplateState[id].selected = e.target.checked;
+                  setTemplate(newTemplateState);
+                }}
+                checked={template[id].selected}
+              />
+            </div>
+          );
+        })}
+      </div>
 
       {sections.map((sec) => {
         return (
           <section key={sec.label} className="mb-12">
-            <SectionTitle sec={sec} />
+            <SectionTitle title={sec.title} description={sec.description} />
 
             {Object.keys(inputState).map((id) => {
               if (inputState[id].label === sec.label) {
@@ -96,7 +98,7 @@ export default function InputSection({}: {}) {
                             key={index}
                             className="grid grid-cols-10 gap-2 sm:mb-6 mb-10"
                           >
-                             {inputState[id].data.length > 1 && (
+                            {inputState[id].data.length > 1 && (
                               <DeleteButtonSm
                                 inputState={inputState}
                                 setInputState={setInputState}
