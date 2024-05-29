@@ -11,6 +11,7 @@ import SectionTitle from "./sectionTitle";
 import { InputType } from "zlib";
 import { DeleteButton, DeleteButtonSm } from "./deleteButton";
 import AddButton from "./addButton";
+import Modal from "./modal";
 
 const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
 const LS_TEMPLATE_KEY = "resume-generator-template-key";
@@ -41,22 +42,41 @@ export default function InputSection({}: {}) {
     console.log("LocalStorage Update: template");
   }, [template]);
 
+  const [templateVisible, setTemplateVisible] = useState("0");
+
   return (
     // <form action={saveData}>
     <>
       <SectionTitle title="Templates" />
-      <div className="flex justify-around">
+      {templateVisible !== "0" && (
+        <Modal visible={templateVisible} setVisible={setTemplateVisible}>
+          <Image
+            src={template[templateVisible].imageUrl}
+            alt={template[templateVisible].templateName}
+            width="500"
+            height="500"
+          />
+        </Modal>
+      )}
+      <div className="grid grid-cols-2 sm:grid-cols-3 justify-around">
         {Object.keys(template).map((id, index) => {
           return (
-            <div key={template[id].templateName} className="flex flex-col gap-2">
+            <div
+              key={template[id].templateName}
+              className="flex flex-col gap-2"
+            >
               <label className="text-sm text-gray-700 font-semibold mx-auto text-center">
                 {template[id].templateName}
               </label>
               <Image
                 src={template[id].imageUrl}
                 alt={template[id].templateName}
+                onClick={() => {
+                  setTemplateVisible(id);
+                }}
                 width="100"
                 height="100"
+                className="hover:cursor-pointer mx-auto"
               />
               <input
                 type="radio"
