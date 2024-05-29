@@ -8,7 +8,31 @@ type Props = {
   index: number;
 };
 
-export default function DeleteButton({
+export function DeleteButton({ inputState, setInputState, id, index }: Props) {
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        const newInputState: InputChunkType = {
+          ...inputState,
+        };
+        newInputState[id].data.splice(index, 1);
+        setInputState(newInputState);
+      }}
+      className="sm:block hidden text-xs col-span-1 justify-self-end col-start-10 m-2 px-auto mt-0"
+    >
+      <Image
+        src="assets/trash.svg"
+        alt="transh icon"
+        width="20"
+        height="20"
+        className="mx-auto"
+      />
+    </button>
+  );
+}
+
+export function DeleteButtonSm({
   inputState,
   setInputState,
   id,
@@ -24,7 +48,7 @@ export default function DeleteButton({
         newInputState[id].data.splice(index, 1);
         setInputState(newInputState);
       }}
-      className="text-xs sm:col-span-1 justify-self-end col-span-2 col-end-11 m-2 px-auto sm:mt-0 mt-[-220px]"
+      className="sm:hidden block text-xs justify-self-end col-span-2 col-start-9 m-2 px-auto"
     >
       <Image
         src="assets/trash.svg"

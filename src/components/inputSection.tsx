@@ -9,7 +9,7 @@ import PrintButton from "./printButton";
 import Background from "./background";
 import SectionTitle from "./sectionTitle";
 import { InputType } from "zlib";
-import DeleteButton from "./deleteButton";
+import { DeleteButton, DeleteButtonSm } from "./deleteButton";
 import AddButton from "./addButton";
 
 const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
@@ -96,12 +96,21 @@ export default function InputSection({}: {}) {
                             key={index}
                             className="grid grid-cols-10 gap-2 sm:mb-6 mb-10"
                           >
+                             {inputState[id].data.length > 1 && (
+                              <DeleteButtonSm
+                                inputState={inputState}
+                                setInputState={setInputState}
+                                id={id}
+                                index={index}
+                              />
+                            )}
                             <InputTitle
                               inputState={inputState}
                               setInputState={setInputState}
                               id={id}
                               index={index}
                             />
+
                             {typeof inputState[id].data[0].date !==
                               "undefined" && (
                               <InputDate
