@@ -24,14 +24,14 @@ const PrintButton = ({
   });
 
   return (
-    <div>
+    <div className="flex justify-end">
       <button
-        style={{ border: "1px solid black" }}
+        className="text-white font-semibold bg-red-400 hover:bg-red-500 py-4 px-4 rounded-full"
         onClick={() => {
           handlePrint();
         }}
       >
-        download PDF
+        Download PDF →
       </button>
       {/* TODO: send input data to appropriate template? */}
       {/* switch (template number) {
