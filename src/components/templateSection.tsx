@@ -46,12 +46,12 @@ export default function TemplateSection({ inputData, label, title }: Props) {
                   <span>{": "}</span>
                   {inputData[key].data.map((work, index) => {
                     return (
-                      <div key={work.title + index}>
+                      <span key={work.title + index}>
                         <span className="text-amber-950">{work.title}</span>
                         {index < inputData[key].data.length - 1 && (
                           <span>{", "}</span>
                         )}
-                      </div>
+                      </span>
                     );
                   })}
                 </>
