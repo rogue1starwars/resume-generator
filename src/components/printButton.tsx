@@ -20,7 +20,7 @@ const PrintButton = ({
   const handlePrint = useReactToPrint({
     content: () => documentRef.current,
     documentTitle: `${inputData.name.data[0].title}'s CV`,
-    bodyClass: "p-16", // some padding
+    bodyClass: "p-2", // some padding
   });
 
   return (

@@ -59,6 +59,16 @@ const dummyData: InputChunkType = {
     label: "basics",
     data: [{ title: "" }],
   },
+  email: {
+    heading: "Email",
+    hidden: false,
+    label: "basics",
+    data: [
+      {
+        title: "",
+      },
+    ],
+  },
   phone: {
     heading: "Phone Number",
     hidden: false,
@@ -89,7 +99,7 @@ const dummyData: InputChunkType = {
       },
     ],
   },
-  WorkExperience: {
+  workExperience: {
     heading: "Work Experience",
     hidden: false,
     label: "work",
