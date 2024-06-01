@@ -2,6 +2,7 @@ export type InputType = {
   heading: string;
   hidden: boolean;
   label: Labels;
+  add: boolean;
   data: {
     title: string;
     description?: string;

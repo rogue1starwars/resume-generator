@@ -6,6 +6,12 @@ import Image from "next/image";
 import { InputChunkType, Sections, TemplateChunkType } from "@/lib/types";
 import { fetchData, fetchSectionData, fetchTemplateData } from "@/lib/data";
 import PrintButton from "./printButton";
+import Background from "./background";
+import SectionTitle from "./sectionTitle";
+import { InputType } from "zlib";
+import { DeleteButton, DeleteButtonSm } from "./deleteButton";
+import AddButton from "./addButton";
+import Modal from "./modal";
 
 const LS_INPUT_DATA_KEY = "resume-generator-input-data-key";
 const LS_TEMPLATE_KEY = "resume-generator-template-key";
@@ -36,131 +42,134 @@ export default function InputSection({}: {}) {
     console.log("LocalStorage Update: template");
   }, [template]);
 
+  const [templateVisible, setTemplateVisible] = useState("0");
+
   return (
     // <form action={saveData}>
     <>
-      {isLoaded ? (
-        <PrintButton inputData={inputState} template={template} />
-      ) : (
-        <div />
+      <SectionTitle title="Templates" />
+      {templateVisible !== "0" && (
+        <Modal visible={templateVisible} setVisible={setTemplateVisible}>
+          <Image
+            src={template[templateVisible].imageUrl}
+            alt={template[templateVisible].templateName}
+            width="500"
+            height="500"
+          />
+        </Modal>
       )}
-      <label>Templates</label>
-      {Object.keys(template).map((id, index) => {
-        return (
-          <div key={template[id].templateName}>
-            <label className="text-lg font-semibold">
-              {template[id].templateName}
-            </label>
-            <Image
-              src={template[id].imageUrl}
-              alt={template[id].templateName}
-              width="100"
-              height="100"
-            />
-            <input
-              type="radio"
-              name="templates"
-              value={template[id].templateName}
-              onChange={(e) => {
-                const newTemplateState: TemplateChunkType = {
-                  ...template,
-                };
-                for (let tp in newTemplateState) {
-                  newTemplateState[tp].selected = false;
-                }
-                newTemplateState[id].selected = e.target.checked;
-                setTemplate(newTemplateState);
-              }}
-              checked={template[id].selected}
-            />
-          </div>
-        );
-      })}
-      {/* {Object.keys(inputState).map((id) => {
-        // console.log(id);
-        return (
-          <fieldset key={id}>
-            <label className="text-lg font-semibold">
-              {inputState[id].heading}
-            </label>
-            <div>
-              {inputState[id].data.map((data, index) => {
-                return (
-                  <div key={index}>
-                    <InputTitle
-                      inputState={inputState}
-                      setInputState={setInputState}
-                      id={id}
-                      index={index}
-                    />
-                    {typeof inputState[id].data[0].date !== "undefined" ? (
-                      <InputDate
-                        inputState={inputState}
-                        setInputState={setInputState}
-                        id={id}
-                        index={index}
-                      />
-                    ) : null}
-                    {typeof inputState[id].data[0].description !==
-                    "undefined" ? (
-                      <InputDescription
-                        inputState={inputState}
-                        setInputState={setInputState}
-                        id={id}
-                        index={index}
-                      />
-                    ) : null}
-                  </div>
-                );
-              })}
+      <div className="grid grid-cols-2 sm:grid-cols-3 justify-around">
+        {Object.keys(template).map((id, index) => {
+          return (
+            <div
+              key={template[id].templateName}
+              className="flex flex-col gap-2"
+            >
+              <label className="text-sm text-gray-700 font-semibold mx-auto text-center">
+                {template[id].templateName}
+              </label>
+              <Image
+                src={template[id].imageUrl}
+                alt={template[id].templateName}
+                onClick={() => {
+                  setTemplateVisible(id);
+                }}
+                width="100"
+                height="100"
+                className="hover:cursor-pointer mx-auto"
+              />
+              <input
+                type="radio"
+                name="templates"
+                value={template[id].templateName}
+                onChange={(e) => {
+                  const newTemplateState: TemplateChunkType = {
+                    ...template,
+                  };
+                  for (let tp in newTemplateState) {
+                    newTemplateState[tp].selected = false;
+                  }
+                  newTemplateState[id].selected = e.target.checked;
+                  setTemplate(newTemplateState);
+                }}
+                checked={template[id].selected}
+              />
             </div>
-          </fieldset>
-        );
-      })} */}
+          );
+        })}
+      </div>
+
       {sections.map((sec) => {
         return (
-          <section key={sec.label}>
-            <h2>{sec.title}</h2>
-            <p>{sec.description}</p>
+          <section key={sec.label} className="mb-12">
+            <SectionTitle title={sec.title} description={sec.description} />
+
             {Object.keys(inputState).map((id) => {
               if (inputState[id].label === sec.label) {
                 return (
-                  <fieldset key={id}>
-                    <label className="text-lg font-semibold">
+                  <fieldset key={id} className="my-4">
+                    <label className="text-sm text-gray-700 mb-2">
                       {inputState[id].heading}
                     </label>
-                    <div>
+                    <div className="my-2">
                       {inputState[id].data.map((data, index) => {
                         return (
-                          <div key={index}>
+                          <div
+                            key={index}
+                            className="grid grid-cols-10 gap-2 sm:mb-6 mb-10"
+                          >
+                            {inputState[id].data.length > 1 && (
+                              <DeleteButtonSm
+                                inputState={inputState}
+                                setInputState={setInputState}
+                                id={id}
+                                index={index}
+                              />
+                            )}
                             <InputTitle
                               inputState={inputState}
                               setInputState={setInputState}
                               id={id}
                               index={index}
                             />
+
                             {typeof inputState[id].data[0].date !==
-                            "undefined" ? (
+                              "undefined" && (
                               <InputDate
                                 inputState={inputState}
                                 setInputState={setInputState}
                                 id={id}
                                 index={index}
                               />
-                            ) : null}
+                            )}
+                            {inputState[id].data.length > 1 && (
+                              <DeleteButton
+                                inputState={inputState}
+                                setInputState={setInputState}
+                                id={id}
+                                index={index}
+                              />
+                            )}
                             {typeof inputState[id].data[0].description !==
-                            "undefined" ? (
+                              "undefined" && (
                               <InputDescription
                                 inputState={inputState}
                                 setInputState={setInputState}
                                 id={id}
                                 index={index}
                               />
-                            ) : null}
+                            )}
                           </div>
                         );
                       })}
                     </div>
+                    {inputState[id].add && (
+                      <AddButton
+                        inputState={inputState}
+                        setInputState={setInputState}
+                        id={id}
+                      />
+                    )}
                   </fieldset>
                 );
               }
@@ -170,6 +179,11 @@ export default function InputSection({}: {}) {
       })}
       {/* <button onClick={() => saveData(userID, inputState)}>Save</button> */}
       {/* <input type="submit" /> */}
+      {isLoaded ? (
+        <PrintButton inputData={inputState} template={template} />
+      ) : (
+        <div />
+      )}
     </>
     // </form>
   );
