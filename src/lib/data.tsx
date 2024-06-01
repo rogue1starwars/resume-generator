@@ -64,6 +64,7 @@ const dummyData: InputChunkType = {
     heading: "Email",
     hidden: false,
     label: "basics",
+    add: false,
     data: [
       {
         title: "",
