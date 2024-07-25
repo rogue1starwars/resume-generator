@@ -10,10 +10,7 @@ interface RequestEvaluationDocumentButtonProps {
   template: TemplateChunkType;
 }
 
-const PrintButton = ({
-  inputData,
-  template,
-}: RequestEvaluationDocumentButtonProps) => {
+const PrintButton = ({ inputData }: RequestEvaluationDocumentButtonProps) => {
   console.log(inputData);
 
   const documentRef = useRef(null);
@@ -30,12 +27,12 @@ const PrintButton = ({
         case 1:
           template 1
           break;
-          case 2:
-            template 2
+        case 2:
+          template 2
+          break;
+          default:
             break;
-            default:
-              break;
-            } */}
+          } */}
       <PrintableTemplate ref={documentRef} inputData={inputData} />
       <button
         className="text-white font-semibold bg-red-400 hover:bg-red-500 py-4 px-4 rounded-full"
