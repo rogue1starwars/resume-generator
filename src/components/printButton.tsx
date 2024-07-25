@@ -30,11 +30,10 @@ const PrintButton = ({ inputData }: RequestEvaluationDocumentButtonProps) => {
         case 2:
           template 2
           break;
-        default:
-          break;
-      } */}
+          default:
+            break;
+          } */}
       <PrintableTemplate ref={documentRef} inputData={inputData} />
-
       <button
         className="text-white font-semibold bg-red-400 hover:bg-red-500 py-4 px-4 rounded-full"
         onClick={() => {
