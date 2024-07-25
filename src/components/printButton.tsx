@@ -10,10 +10,7 @@ interface RequestEvaluationDocumentButtonProps {
   template: TemplateChunkType;
 }
 
-const PrintButton = ({
-  inputData,
-  template,
-}: RequestEvaluationDocumentButtonProps) => {
+const PrintButton = ({ inputData }: RequestEvaluationDocumentButtonProps) => {
   console.log(inputData);
 
   const documentRef = useRef(null);
@@ -25,14 +22,6 @@ const PrintButton = ({
 
   return (
     <div className="flex justify-end">
-      <button
-        className="text-white font-semibold bg-red-400 hover:bg-red-500 py-4 px-4 rounded-full"
-        onClick={() => {
-          handlePrint();
-        }}
-      >
-        Download PDF →
-      </button>
       {/* TODO: send input data to appropriate template? */}
       {/* switch (template number) {
         case 1:
@@ -45,6 +34,15 @@ const PrintButton = ({
           break;
       } */}
       <PrintableTemplate ref={documentRef} inputData={inputData} />
+
+      <button
+        className="text-white font-semibold bg-red-400 hover:bg-red-500 py-4 px-4 rounded-full"
+        onClick={() => {
+          handlePrint();
+        }}
+      >
+        Download PDF →
+      </button>
     </div>
   );
 };

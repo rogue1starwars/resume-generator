@@ -45,7 +45,6 @@ export default function InputSection({}: {}) {
   const [templateVisible, setTemplateVisible] = useState("0");
 
   return (
-    // <form action={saveData}>
     <>
       <SectionTitle title="Templates" />
       {templateVisible !== "0" && (
@@ -177,14 +176,11 @@ export default function InputSection({}: {}) {
           </section>
         );
       })}
-      {/* <button onClick={() => saveData(userID, inputState)}>Save</button> */}
-      {/* <input type="submit" /> */}
       {isLoaded ? (
         <PrintButton inputData={inputState} template={template} />
       ) : (
         <div />
       )}
     </>
-    // </form>
   );
 }
